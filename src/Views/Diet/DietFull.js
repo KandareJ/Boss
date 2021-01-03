@@ -6,7 +6,7 @@ import WeightEdit from './WeightEdit';
 import FoodItem from './FoodItem';
 import Button from './Button';
 
-const Diet = () => {
+const DietFull = ({ navigation }) => {
   const weight = 190;
   const height = 100;
   const protein = 5;
@@ -51,18 +51,18 @@ const Diet = () => {
 
       <View style={styles.bottom}>
         <Button title='Add Water' />
-        <Button title='Add Food' />
+        <Button title='Add Food' onPress={() => { navigation.navigate('Item') }} />
       </View>
     </View>
   );
 };
 
-export default Diet;
+export default DietFull;
 
 const styles = StyleSheet.create({
   bg: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 10,
     width: '100%'
   },
   widgets: {

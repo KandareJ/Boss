@@ -22,7 +22,6 @@ export default FoodItem;
 const styles = StyleSheet.create({
   bg: {
     width: '100%',
-    backgroundColor: 'white',
     alignItems: 'center'
   },
   item: {

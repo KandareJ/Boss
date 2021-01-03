@@ -1,23 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 
-import Profile from './Views/Diet/Profile';
+import Programs from './Views/Programs';
 
 const App = () => {
-
   return (
-      <View style={styles.bg}>
-        <Profile />
-      </View>
+    <NavigationContainer>
+      <Programs />
+    </NavigationContainer>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});

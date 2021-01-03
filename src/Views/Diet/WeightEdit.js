@@ -20,7 +20,7 @@ const editingMode = (weight, setEditing) => {
   return (
     <View style={styles.row}>
       <Text>Weight:</Text>
-      <TextInput style={{ height: 25, minWidth: 35, borderColor: 'gray', borderWidth: 1 }} />
+      <TextInput style={{ height: 25, minWidth: 35, borderColor: 'gray', borderWidth: 1 }} keyboardType='numeric'/>
       <Button title='Save' onPress={() => {setEditing(false)}}/>
     </View>
   );
