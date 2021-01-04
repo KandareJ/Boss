@@ -7,10 +7,10 @@ const FoodItem = ({item}) => {
       <View style={styles.item}>
         <View><Text style={styles.title}>{item.name}</Text></View>
         <View style={styles.row}>
-          <View style={styles.col}><Text style={styles.text}>{(item.protein) * item.serving}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.fat) * item.serving}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.carb) * item.serving}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.protein * 4 + item.carb * 4 + item.fat * 9) * item.serving}</Text></View>
+          <View style={styles.col}><Text style={styles.text}>{(item.protein) * item.servings}</Text></View>
+          <View style={styles.col}><Text style={styles.text}>{(item.fat) * item.servings}</Text></View>
+          <View style={styles.col}><Text style={styles.text}>{(item.carbs) * item.servings}</Text></View>
+          <View style={styles.col}><Text style={styles.text}>{(item.protein * 4 + item.carbs * 4 + item.fat * 9) * item.servings}</Text></View>
         </View>
       </View>
     </View>

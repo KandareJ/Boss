@@ -1,33 +1,29 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 
 import Widget from './Widget';
 import WeightEdit from './WeightEdit';
 import FoodItem from './FoodItem';
 import Button from './Button';
+import { macros } from '../../logic/macros';
 
-const DietFull = ({ navigation }) => {
-  const weight = 190;
-  const height = 100;
-  const protein = 5;
-  const fat = 5;
-  const carbs = 5;
-  const calories = 2000;
-  const water = 2.00;
+const DietFull = ({ navigation, items, profile }) => {
+  const {protein, carbohydrates, fat, calories, water} = macros(profile, items);
   const width = '20%';
 
   return (
     <View style={styles.bg}>
       <View style={styles.top}>
         <View style={styles.topStats}>
-          <Text>Calories: {calories}</Text>
-          <WeightEdit weight={weight}/>
+          <Text>Calories: {calories.toFixed(1)}</Text>
+          <WeightEdit weight={profile.weight.toFixed(1)}/>
         </View>
         <View style={styles.widgets}>
-          <Widget name='Proteins' number={protein} width={width} />
-          <Widget name='Fats' number={fat} width={width} />
-          <Widget name='Carbs' number={carbs} width={width} />
-          <Widget name='Water' number={water} width={width} />
+          <Widget name='Proteins' number={protein.toFixed(1)} width={width} />
+          <Widget name='Fats' number={fat.toFixed(1)} width={width} />
+          <Widget name='Carbs' number={carbohydrates.toFixed(1)} width={width} />
+          <Widget name='Water' number={water.toFixed(1)} width={width} />
         </View>
       </View>
 
@@ -41,7 +37,7 @@ const DietFull = ({ navigation }) => {
           </View>
         </View>
         <ScrollView>
-          {dummy.map((foodItem, i) => {
+          {items.map((foodItem, i) => {
             return (
               <FoodItem item={foodItem} key={foodItem.name + i} />
             );
@@ -56,8 +52,6 @@ const DietFull = ({ navigation }) => {
     </View>
   );
 };
-
-export default DietFull;
 
 const styles = StyleSheet.create({
   bg: {
@@ -106,19 +100,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const dummy = [
-  {
-    name: 'Banana',
-    fat: 1,
-    carb: 1,
-    protein: 1,
-    serving: 1
-  },
-  {
-    name: 'Apple',
-    fat: 1,
-    carb: 1,
-    protein: 1,
-    serving: 2
-  }
-];
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+    profile: state.diet_profile,
+  };
+}
+
+export default connect(mapStateToProps)(DietFull);

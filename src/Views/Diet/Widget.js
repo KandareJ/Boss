@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 
 const Widget = ({number, name, width}) => {
   const bg = {
-    width: width || '40%'
+    width: width || '30%'
   };
 
   return (
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontWeight: 'bold',
-    fontSize: 30
+    fontSize: 25
   },
   name: {
     fontSize: 17

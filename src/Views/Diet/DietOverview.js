@@ -1,17 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 import Widget from './Widget';
+import { macros } from '../../logic/macros';
 
-const weight = 190;
-const height = 100;
-const protein = 5;
-const fat = 5;
-const carbs = 5;
-const calories = 2000;
-const water = 2.00;
-
-const DietOverview = () => {
+const DietOverview = ({ profile, items }) => {
+  const { fat, carbohydrates, calories, protein, water } = macros(profile, items);
   return (
     <View style={styles.card}>
       <View>
@@ -20,24 +15,22 @@ const DietOverview = () => {
         </View>
         <View style={styles.row}>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Weight: {weight}</Text>
+            <Text style={styles.text}>Weight: {profile.weight.toFixed(1)}</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Calories: {calories}</Text>
+            <Text style={styles.text}>Calories: {calories.toFixed(0)}</Text>
           </View>
         </View>
       </View>
       <View style={styles.widgets}>
-        <Widget name='Proteins' number={protein} />
-        <Widget name='Fats' number={fat} />
-        <Widget name='Carbs' number={carbs} />
-        <Widget name='Water' number={water} />
+        <Widget name='Proteins' number={protein.toFixed(1)} />
+        <Widget name='Fats' number={fat.toFixed(1)} />
+        <Widget name='Carbs' number={carbohydrates.toFixed(1)} />
+        <Widget name='Water' number={water.toFixed(1)} />
       </View>
     </View>
   );
 };
-
-export default DietOverview;
 
 const styles = StyleSheet.create({
   card: {
@@ -75,3 +68,12 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
 });
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.diet_profile,
+    items: state.items
+  };
+}
+
+export default connect(mapStateToProps)(DietOverview);

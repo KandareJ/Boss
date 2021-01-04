@@ -9,6 +9,7 @@ export const get_start_date = async () => {
   return new Date(JSON.parse(timestamp));
 };
 
+// HERE ========================================================================
 export const set_height = async (height) => {
   await AsyncStorage.setItem('boss:diet:height', JSON.stringify(height));
 }
@@ -62,6 +63,7 @@ export const get_activity_level = async () => {
   const activity_level = await AsyncStorage.getItem('boss:diet:activity_level');
   return activity_level ? JSON.parse(activity_level) : "Not Set";
 }
+// TO HERE =====================================================================
 
 export const set_item = async (item) => {
   let items = await get_items();
