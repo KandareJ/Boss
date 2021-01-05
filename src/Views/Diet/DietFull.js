@@ -8,8 +8,8 @@ import FoodItem from './FoodItem';
 import Button from './Button';
 import { macros } from '../../logic/macros';
 
-const DietFull = ({ navigation, items, profile }) => {
-  const {protein, carbohydrates, fat, calories, water} = macros(profile, items);
+const DietFull = ({ navigation, items, profile, water_consumed }) => {
+  const {protein, carbohydrates, fat, calories, water} = macros(profile, items, water_consumed);
   const width = '20%';
 
   return (
@@ -23,7 +23,7 @@ const DietFull = ({ navigation, items, profile }) => {
           <Widget name='Proteins' number={protein.toFixed(1)} width={width} />
           <Widget name='Fats' number={fat.toFixed(1)} width={width} />
           <Widget name='Carbs' number={carbohydrates.toFixed(1)} width={width} />
-          <Widget name='Water' number={water.toFixed(1)} width={width} />
+          <Widget name='Water' number={(water).toFixed(1)} width={width} />
         </View>
       </View>
 
@@ -46,7 +46,7 @@ const DietFull = ({ navigation, items, profile }) => {
       </View>
 
       <View style={styles.bottom}>
-        <Button title='Add Water' />
+        <Button title='Add Water' onPress={() => { navigation.navigate('Water') }} />
         <Button title='Add Food' onPress={() => { navigation.navigate('Item') }} />
       </View>
     </View>
@@ -104,6 +104,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.items,
     profile: state.diet_profile,
+    water_consumed: state.water
   };
 }
 

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Widget from './Widget';
 import { macros } from '../../logic/macros';
 
-const DietOverview = ({ profile, items }) => {
-  const { fat, carbohydrates, calories, protein, water } = macros(profile, items);
+const DietOverview = ({ profile, items, water_consumed }) => {
+  const { fat, carbohydrates, calories, protein, water } = macros(profile, items, water_consumed);
   return (
     <View style={styles.card}>
       <View>
@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     profile: state.diet_profile,
-    items: state.items
+    items: state.items,
+    water_consumed: state.water
   };
 }
 

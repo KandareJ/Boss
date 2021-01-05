@@ -19,7 +19,7 @@ const ProgramList = ({ navigation, programs }) => {
               );
             }
           })}
-          <Button title='+' onPress={() => navigation.navigate('Profile')}/>
+          {!programs.length &&<Button title='+' onPress={() => navigation.navigate('Profile')}/>}
         </View>
       </ScrollView>
     </View>

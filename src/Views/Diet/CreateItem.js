@@ -77,23 +77,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const dummy = [
-  {
-    name: 'Banana',
-    fat: 1,
-    carb: 1,
-    protein: 1,
-    serving: 1
-  },
-  {
-    name: 'Apple',
-    fat: 1,
-    carb: 1,
-    protein: 1,
-    serving: 2
-  }
-];
-
 const mapStateToProps = (state) => {
   return {
   };

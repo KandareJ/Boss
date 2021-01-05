@@ -1,6 +1,7 @@
 export const ADD_PROGRAM = 'ADD_PROGRAM';
 export const NEW_PROFILE = 'NEW_PROFILE';
 export const ADD_ITEM = 'ADD_ITEM';
+export const ADD_WATER = 'ADD_WATER';
 
 export const add_program = (program) => {
   return {
@@ -22,3 +23,10 @@ export const add_item = (item) => {
     payload: item
   };
 };
+
+export const add_water = (water) => {
+  return {
+    type: ADD_WATER,
+    payload: water
+  }
+}

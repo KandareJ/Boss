@@ -1,4 +1,4 @@
-export const macros = (profile, items) => {
+export const macros = (profile, items, water_consumed) => {
   const weight = profile.weight * 0.453592;
   const height = profile.height * 2.54;
 
@@ -29,7 +29,7 @@ export const macros = (profile, items) => {
     protein_eaten += items[i].protein * items[i].servings;
     carbs_eaten += items[i].carbs * items[i].servings;
     fats_eaten += items[i].fat * items[i].servings;
-    calories_eaten += items[i].calories * items[i].servings;
+    calories_eaten += (items[i].fat * 9 + items[i].carbs * 4 + items[i].protein * 4 ) * items[i].servings;
   }
 
   return {
@@ -37,6 +37,6 @@ export const macros = (profile, items) => {
     carbohydrates: final_calories * 0.556 / 4 - carbs_eaten,
     fat: final_calories * 0.250 / 9 - fats_eaten,
     calories: final_calories - calories_eaten,
-    water: 2,
+    water: 68 - water_consumed,
   };
 }
