@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   radioButton: {
     backgroundColor: 'rgba(255,255,255,0)',
-    borderColor: 'rgb(70,100,140)',
+    borderColor: '#4dad9a',
     borderWidth: 2,
     width: 20,
     height: 20,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   innerRadio: {
-    backgroundColor: 'rgb(70,100,140)',
+    backgroundColor: '#4dad9a',
     width: 12,
     height: 12,
     borderRadius: 6

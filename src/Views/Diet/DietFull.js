@@ -46,8 +46,8 @@ const DietFull = ({ navigation, items, profile, water_consumed }) => {
       </View>
 
       <View style={styles.bottom}>
-        <Button title='Add Water' onPress={() => { navigation.navigate('Water') }} />
-        <Button title='Add Food' onPress={() => { navigation.navigate('Item') }} />
+        <Button title='Add Water' textStyle={styles.buttonText} style={styles.button} onPress={() => { navigation.navigate('Water') }} />
+        <Button title='Add Food' textStyle={styles.buttonText} style={styles.button} onPress={() => { navigation.navigate('Item') }} />
       </View>
     </View>
   );
@@ -98,6 +98,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold'
   },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 7
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: '500'
+  }
 });
 
 const mapStateToProps = (state) => {

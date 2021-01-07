@@ -47,16 +47,19 @@ const WeightEdit = ({weight, new_profile, profile}) => {
 
 const viewingMode = (weight, setEditing) => {
   return (
+    <View style={styles.row}>
     <TouchableOpacity onPress={() => {setEditing(true)}}>
       <Text>Weight: {weight}</Text>
     </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 35
   },
   input: {
     height: 25,

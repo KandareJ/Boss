@@ -19,7 +19,7 @@ const AddWater = ({add_water, navigation}) => {
         <Text style={styles.label}>Amount (oz):</Text>
         <TextInput style={styles.input} value={amount} onChangeText={(value) => {validate(value, setAmount)}} placeholder='8' />
       </View>
-      <Button title='Done' onPress={() => {
+      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={() => {
         if (amount) {
           add_water(parseFloat(amount));
           navigation.goBack();
@@ -48,6 +48,16 @@ const styles = StyleSheet.create({
   inputSection: {
     flexDirection: 'row',
     marginBottom: 20
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 7,
+    marginHorizontal: 30,
+    alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: '500'
   }
 });
 

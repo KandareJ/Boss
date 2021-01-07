@@ -39,7 +39,7 @@ const CreateItem = ({navigation, add_item}) => {
         <Text style={styles.label}>Servings:</Text>
         <TextInput style={styles.input} value={servings} onChangeText={(value) => {validate(value, setServings)}} placeholder='1' keyboardType='numeric'/>
       </View>
-      <Button title='Done' onPress={() => {
+      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={() => {
         if (name && fat && protein && carbs && servings) {
           add_item({
             name,
@@ -74,6 +74,16 @@ const styles = StyleSheet.create({
   inputSection: {
     flexDirection: 'row',
     marginBottom: 20
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 7,
+    marginHorizontal: 30,
+    alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: '500'
   }
 });
 

@@ -55,7 +55,7 @@ const Profile = ({ add_program, new_profile, navigation }) => {
         <Text style={styles.label}>Goal:</Text>
         <RadioButtons options={['Fat Loss', 'Maintain', 'Bulk']} selected={goal} select={setGoal} />
       </View>
-      <Button title='Save' onPress={() => {
+      <Button title='Save' textStyle={styles.buttonText} style={styles.button} onPress={() => {
         if (height && weight && age) {
           new_profile({
             height: parseFloat(height),
@@ -67,9 +67,6 @@ const Profile = ({ add_program, new_profile, navigation }) => {
           });
           add_program('Diet');
           navigation.goBack();
-        }
-        else {
-          // warn user
         }
       }} />
     </View>
@@ -99,6 +96,16 @@ const styles = StyleSheet.create({
   },
   radioSection: {
     marginBottom: 20
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 7,
+    marginHorizontal: 30,
+    alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 22,
+    fontWeight: '500'
   }
 });
 
