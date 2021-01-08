@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import Button from './Button';
 import { add_water } from '../../actions';
+import { get_day, set_day } from '../../Database/DietDatabase';
+import { getDate } from '../../logic/date';
 
 const AddWater = ({add_water, navigation}) => {
   const [amount, setAmount] = React.useState("");
@@ -13,18 +15,23 @@ const AddWater = ({add_water, navigation}) => {
     if (re.test(value) || value === "") setValue(value);
   };
 
+  const onPress = async () => {
+    if (amount) {
+      let day = await get_day(getDate());
+      day.water += parseFloat(amount);
+      await set_day(getDate(), day);
+      add_water(parseFloat(amount));
+      navigation.goBack();
+    }
+  };
+
   return (
     <View style={styles.bg}>
       <View style={styles.inputSection}>
         <Text style={styles.label}>Amount (oz):</Text>
         <TextInput style={styles.input} value={amount} onChangeText={(value) => {validate(value, setAmount)}} placeholder='8' />
       </View>
-      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={() => {
-        if (amount) {
-          add_water(parseFloat(amount));
-          navigation.goBack();
-        }
-      }} />
+      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
     </View>
   );
 };

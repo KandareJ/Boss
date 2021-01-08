@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { add_item } from '../../actions';
 import Button from './Button';
+import { get_day, set_day } from '../../Database/DietDatabase';
+import { getDate } from '../../logic/date';
 
 const CreateItem = ({navigation, add_item}) => {
   const [name, setName] = React.useState("");
@@ -15,6 +17,25 @@ const CreateItem = ({navigation, add_item}) => {
   const validate = (value, setValue) => {
     const re = /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/;
     if (re.test(value) || value === "") setValue(value);
+  };
+
+  const onPress = async () => {
+    if (name && fat && protein && carbs && servings) {
+      let item = {
+        name,
+        fat,
+        carbs,
+        protein,
+        servings
+      };
+
+      let day = await get_day(getDate());
+      day.items.push(item);
+      await set_day(getDate(), day);
+
+      add_item(item);
+      navigation.goBack();
+    }
   };
 
   return (
@@ -39,18 +60,7 @@ const CreateItem = ({navigation, add_item}) => {
         <Text style={styles.label}>Servings:</Text>
         <TextInput style={styles.input} value={servings} onChangeText={(value) => {validate(value, setServings)}} placeholder='1' keyboardType='numeric'/>
       </View>
-      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={() => {
-        if (name && fat && protein && carbs && servings) {
-          add_item({
-            name,
-            fat,
-            carbs,
-            protein,
-            servings
-          });
-          navigation.goBack();
-        }
-      }} />
+      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
     </View>
   );
 };
