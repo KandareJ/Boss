@@ -47,7 +47,7 @@ const DietFull = ({ navigation, items, profile, water_consumed }) => {
 
       <View style={styles.bottom}>
         <Button title='Add Water' textStyle={styles.buttonText} style={styles.button} onPress={() => { navigation.navigate('Water') }} />
-        <Button title='Add Food' textStyle={styles.buttonText} style={styles.button} onPress={() => { navigation.navigate('Item') }} />
+        <Button title='Add Food' textStyle={styles.buttonText} style={styles.button} onPress={() => { navigation.navigate('Add Item') }} />
       </View>
     </View>
   );

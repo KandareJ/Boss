@@ -9,10 +9,10 @@ const DietOverview = ({ profile, items, water_consumed }) => {
   const { fat, carbohydrates, calories, protein, water } = macros(profile, items, water_consumed);
   return (
     <View style={styles.card}>
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Diet Overview</Text>
-        </View>
+      <View style={styles.header}>
+        <Text style={styles.title}>Diet Overview</Text>
+      </View>
+      <View style={styles.body}>
         <View style={styles.row}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Weight: {profile.weight.toFixed(1)}</Text>
@@ -36,12 +36,26 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
     width: '90%',
-    padding: 10,
     shadowColor: 'black',
     shadowRadius: 5,
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: .4,
     borderRadius: 10
+  },
+  header: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#4dad9a',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    paddingVertical: 5,
+    shadowColor: 'black',
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: .2,
+  },
+  body: {
+    padding: 10
   },
   widgets: {
     flexWrap: 'wrap',
@@ -59,13 +73,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20
   },
-  titleContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20
-  },
   title: {
-    fontSize: 25
+    fontSize: 25,
+    fontWeight: '600'
   },
 });
 
