@@ -87,10 +87,11 @@ const styles = StyleSheet.create({
   bg: {
     flex: 1,
     width: '100%',
-    marginTop: 10,
   },
   scroll: {
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    marginTop: 10,
+    marginBottom: 10
   },
   label: {
     fontWeight: 'bold',
