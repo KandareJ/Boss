@@ -29,7 +29,7 @@ const AddWater = ({add_water, navigation}) => {
     <View style={styles.bg}>
       <View style={styles.inputSection}>
         <Text style={styles.label}>Amount (oz):</Text>
-        <TextInput style={styles.input} value={amount} onChangeText={(value) => {validate(value, setAmount)}} placeholder='8' />
+        <TextInput style={styles.input} value={amount} onChangeText={(value) => {validate(value, setAmount)}} placeholder='8' keyboardType='numeric'/>
       </View>
       <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
     </View>

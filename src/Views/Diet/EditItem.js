@@ -2,17 +2,18 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import { add_item } from '../../actions';
+import { set_items } from '../../actions';
 import Button from './Button';
 import { get_day, set_day } from '../../Database/DietDatabase';
 import { getDate } from '../../logic/date';
 
-const CreateItem = ({navigation, add_item}) => {
-  const [name, setName] = React.useState("");
-  const [fat, setFat] = React.useState("");
-  const [protein, setProtein] = React.useState("");
-  const [carbs, setCarbs] = React.useState("");
-  const [servings, setServings] = React.useState("");
+const EditItem = ({navigation, set_items, route }) => {
+  const { item, index } = route.params;
+  const [name, setName] = React.useState(item.name);
+  const [fat, setFat] = React.useState(item.fat);
+  const [protein, setProtein] = React.useState(item.protein);
+  const [carbs, setCarbs] = React.useState(item.carbs);
+  const [servings, setServings] = React.useState(item.servings);
 
   const validate = (value, setValue) => {
     const re = /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/;
@@ -30,10 +31,29 @@ const CreateItem = ({navigation, add_item}) => {
       };
 
       let day = await get_day(getDate());
-      day.items.push(item);
+      day.items[index] = item;
       await set_day(getDate(), day);
 
-      add_item(item);
+      set_items(day.items);
+      navigation.goBack();
+    }
+  };
+
+  const deleteOnPress = async () => {
+    if (name && fat && protein && carbs && servings) {
+      let item = {
+        name,
+        fat,
+        carbs,
+        protein,
+        servings
+      };
+
+      let day = await get_day(getDate());
+      day.items.splice(index, 1);
+      await set_day(getDate(), day);
+
+      set_items(day.items);
       navigation.goBack();
     }
   };
@@ -60,7 +80,10 @@ const CreateItem = ({navigation, add_item}) => {
         <Text style={styles.label}>Servings:</Text>
         <TextInput style={styles.input} value={servings} onChangeText={(value) => {validate(value, setServings)}} placeholder='1' keyboardType='numeric'/>
       </View>
-      <Button title='Done' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
+      <View style={styles.buttons}>
+        <Button title='Delete' textStyle={styles.buttonText} style={styles.deleteButton} onPress={deleteOnPress} />
+        <Button title='Save' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
+      </View>
     </View>
   );
 };
@@ -88,12 +111,24 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 10,
     paddingHorizontal: 7,
-    marginHorizontal: 30,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 100
   },
   buttonText: {
     fontSize: 22,
     fontWeight: '500'
+  },
+  deleteButton: {
+    paddingVertical: 10,
+    alignItems: 'center',
+    backgroundColor: '#ad4d4d',
+    width: 100
+  },
+  buttons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%'
   }
 });
 
@@ -102,4 +137,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { add_item })(CreateItem);
+export default connect(mapStateToProps, { set_items })(EditItem);

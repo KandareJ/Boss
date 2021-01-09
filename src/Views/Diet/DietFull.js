@@ -20,26 +20,26 @@ const DietFull = ({ navigation, items, profile, water_consumed }) => {
           <WeightEdit weight={profile.weight.toFixed(1)}/>
         </View>
         <View style={styles.widgets}>
-          <Widget name='Proteins' number={protein.toFixed(1)} width={width} />
+          <Widget name='Water' number={(water).toFixed(1)} width={width} />
           <Widget name='Fats' number={fat.toFixed(1)} width={width} />
           <Widget name='Carbs' number={carbohydrates.toFixed(1)} width={width} />
-          <Widget name='Water' number={(water).toFixed(1)} width={width} />
+          <Widget name='Proteins' number={protein.toFixed(1)} width={width} />
         </View>
       </View>
 
       <View style={styles.middle}>
         <View style={styles.innerMiddle}>
           <View style={styles.row}>
-            <View style={styles.col}><Text style={styles.text}>Proteins</Text></View>
+            <View style={styles.col}><Text style={styles.text}>Calories</Text></View>
             <View style={styles.col}><Text style={styles.text}>Fats</Text></View>
             <View style={styles.col}><Text style={styles.text}>Carbs</Text></View>
-            <View style={styles.col}><Text style={styles.text}>Calories</Text></View>
+            <View style={styles.col}><Text style={styles.text}>Proteins</Text></View>
           </View>
         </View>
         <ScrollView>
           {items.map((foodItem, i) => {
             return (
-              <FoodItem item={foodItem} key={foodItem.name + i} />
+              <FoodItem item={foodItem} key={foodItem.name + i} index={i} navigation={navigation} />
             );
           })}
         </ScrollView>

@@ -1,19 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const FoodItem = ({item}) => {
+const FoodItem = ({item, index, navigation}) => {
+  const onPress = () => {
+    navigation.navigate('Edit Item', {
+      item,
+      index
+    })
+  }
+
   return (
-    <View style={styles.bg}>
-      <View style={styles.item}>
-        <View><Text style={styles.title}>{item.name}</Text></View>
-        <View style={styles.row}>
-          <View style={styles.col}><Text style={styles.text}>{(item.protein) * item.servings}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.fat) * item.servings}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.carbs) * item.servings}</Text></View>
-          <View style={styles.col}><Text style={styles.text}>{(item.protein * 4 + item.carbs * 4 + item.fat * 9) * item.servings}</Text></View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.bg}>
+        <View style={styles.item}>
+          <View><Text style={styles.title}>{item.name}</Text></View>
+          <View style={styles.row}>
+            <View style={styles.col}><Text style={styles.text}>{(item.protein * 4 + item.carbs * 4 + item.fat * 9) * item.servings}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{(item.fat) * item.servings}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{(item.carbs) * item.servings}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{(item.protein) * item.servings}</Text></View>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

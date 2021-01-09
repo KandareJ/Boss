@@ -23,10 +23,10 @@ const DietOverview = ({ profile, items, water_consumed }) => {
         </View>
       </View>
       <View style={styles.widgets}>
-        <Widget name='Proteins' number={protein.toFixed(1)} />
+        <Widget name='Water' number={water.toFixed(1)} />
         <Widget name='Fats' number={fat.toFixed(1)} />
         <Widget name='Carbs' number={carbohydrates.toFixed(1)} />
-        <Widget name='Water' number={water.toFixed(1)} />
+        <Widget name='Proteins' number={protein.toFixed(1)} />
       </View>
     </View>
   );

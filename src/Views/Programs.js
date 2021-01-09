@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ProgramList from './ProgramList';
 import DietFull from './Diet/DietFull';
 import CreateItem from './Diet/CreateItem';
+import EditItem from './Diet/EditItem';
 import Profile from './Diet/Profile';
 import AddWater from './Diet/AddWater';
 import { getDate } from '../logic/date';
@@ -36,7 +37,8 @@ const Programs = ({ add_program, new_profile, set_items, set_water, programs }) 
     <Stack.Navigator>
       <Stack.Screen name="Home" component={ProgramList} options={options} />
       <Stack.Screen name="Diet" component={DietFull} options={options} />
-      <Stack.Screen name="Item" component={CreateItem} options={options} />
+      <Stack.Screen name="Add Item" component={CreateItem} options={options} />
+      <Stack.Screen name="Edit Item" component={EditItem} options={options} />
       <Stack.Screen name="Profile" component={Profile} options={options} />
       <Stack.Screen name="Water" component={AddWater} options={options} />
     </Stack.Navigator>
