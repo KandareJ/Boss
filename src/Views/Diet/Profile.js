@@ -7,13 +7,13 @@ import Button from './Button';
 import { add_program, new_profile } from '../../actions';
 import { set_profile } from '../../Database/DietDatabase';
 
-const Profile = ({ add_program, new_profile, navigation }) => {
-  const [gender, setGender] = React.useState("Male");
-  const [exercise, setExercise] = React.useState("Sedentary");
-  const [goal, setGoal] = React.useState("Maintain");
-  const [height, setHeight] = React.useState("");
-  const [weight, setWeight] = React.useState("");
-  const [age, setAge] = React.useState("");
+const Profile = ({ add_program, new_profile, navigation, profile, programs }) => {
+  const [gender, setGender] = React.useState((profile.gender) ? profile.gender : "Male");
+  const [exercise, setExercise] = React.useState((profile.activity_level) ? profile.activity_level : "Sedentary");
+  const [goal, setGoal] = React.useState((profile.goal) ? profile.goal : "Maintain");
+  const [height, setHeight] = React.useState((profile.height) ? profile.height + "" : "");
+  const [weight, setWeight] = React.useState((profile.weight) ? profile.weight + "" : "");
+  const [age, setAge] = React.useState((profile.age) ? profile.age + "" : "");
 
   const checkHeight = (val) => {
     const re = /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/;
@@ -31,17 +31,22 @@ const Profile = ({ add_program, new_profile, navigation }) => {
   }
 
   const onPress = async () => {
-    await set_profile(parseFloat(height), parseFloat(weight), parseInt(age), gender, goal, exercise);
-    new_profile({
-      height: parseFloat(height),
-      weight: parseFloat(weight),
-      age: parseInt(age),
-      gender,
-      activity_level: exercise,
-      goal,
-    });
-    add_program('Diet');
-    navigation.goBack();
+    if (height && weight && age) {
+      await set_profile(parseFloat(height), parseFloat(weight), parseInt(age), gender, goal, exercise);
+      new_profile({
+        height: parseFloat(height),
+        weight: parseFloat(weight),
+        age: parseInt(age),
+        gender,
+        activity_level: exercise,
+        goal,
+      });
+
+      if (programs.indexOf('Diet') === -1) {
+        add_program('Diet');
+      }
+      navigation.goBack();
+    }
   }
 
   return (
@@ -72,11 +77,7 @@ const Profile = ({ add_program, new_profile, navigation }) => {
             <Text style={styles.label}>Goal:</Text>
             <RadioButtons options={['Fat Loss', 'Maintain', 'Bulk']} selected={goal} select={setGoal} />
           </View>
-          <Button title='Save' textStyle={styles.buttonText} style={styles.button} onPress={() => {
-            if (height && weight && age) {
-              onPress();
-            }
-          }} />
+          <Button title='Save' textStyle={styles.buttonText} style={styles.button} onPress={onPress} />
         </View>
       </ScrollView>
     </View>
@@ -124,6 +125,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
+    profile: state.diet_profile,
+    programs: state.programs
   };
 }
 

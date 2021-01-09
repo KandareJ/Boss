@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux';
 
@@ -36,7 +37,7 @@ const Programs = ({ add_program, new_profile, set_items, set_water, programs }) 
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={ProgramList} options={options} />
-      <Stack.Screen name="Diet" component={DietFull} options={options} />
+      <Stack.Screen name="Diet" component={DietFull} options={dietFullOptions} />
       <Stack.Screen name="Add Item" component={CreateItem} options={options} />
       <Stack.Screen name="Edit Item" component={EditItem} options={options} />
       <Stack.Screen name="Profile" component={Profile} options={options} />
@@ -57,6 +58,21 @@ const options = {
   headerTitleStyle: {
     fontWeight: 'bold',
   }
+};
+
+const dietFullOptions = ({ navigation }) => {
+  return {
+    ...options,
+    headerRight: () => {
+      return (
+        <View style={{marginRight: 10}}>
+          <Button title='Profile' color='white' onPress={() => {
+            navigation.navigate("Profile")
+          }}/>
+        </View>
+      );
+    }
+  };
 };
 
 const mapStateToProps = (state) => {
