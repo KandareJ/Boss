@@ -15,10 +15,10 @@ const FoodItem = ({item, index, navigation}) => {
         <View style={styles.item}>
           <View><Text style={styles.title}>{item.name}</Text></View>
           <View style={styles.row}>
-            <View style={styles.col}><Text style={styles.text}>{((item.protein * 4 + item.carbs * 4 + item.fat * 9) * item.servings).toFixed(1)}</Text></View>
-            <View style={styles.col}><Text style={styles.text}>{((item.fat) * item.servings).toFixed(1)}</Text></View>
-            <View style={styles.col}><Text style={styles.text}>{((item.carbs) * item.servings).toFixed(1)}</Text></View>
-            <View style={styles.col}><Text style={styles.text}>{((item.protein) * item.servings).toFixed(1)}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{((item.protein * 4 + item.carbs * 4 + item.fat * 9) * item.servings).toFixed(0)}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{((item.fat) * item.servings).toFixed(0)}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{((item.carbs) * item.servings).toFixed(0)}</Text></View>
+            <View style={styles.col}><Text style={styles.text}>{((item.protein) * item.servings).toFixed(0)}</Text></View>
           </View>
         </View>
       </View>
