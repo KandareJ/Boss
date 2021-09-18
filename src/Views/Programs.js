@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux';
 
 import ProgramList from './ProgramList';
+import ProgramSelection from './ProgramSelection';
 import DietFull from './Diet/DietFull';
 import CreateItem from './Diet/CreateItem';
 import EditItem from './Diet/EditItem';
@@ -37,11 +38,16 @@ const Programs = ({ add_program, new_profile, set_items, set_water, programs }) 
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={ProgramList} options={options} />
+      <Stack.Screen name="Selection" component={ProgramSelection} options={options} />
+
+      {/*Diet views*/}
       <Stack.Screen name="Diet" component={DietFull} options={dietFullOptions} />
       <Stack.Screen name="Add Item" component={CreateItem} options={options} />
       <Stack.Screen name="Edit Item" component={EditItem} options={options} />
       <Stack.Screen name="Profile" component={Profile} options={options} />
       <Stack.Screen name="Water" component={AddWater} options={options} />
+      
+      {/*Shred views*/}
     </Stack.Navigator>
   );
 };

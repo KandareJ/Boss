@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import DietOverview from './Diet/DietOverview';
 import Button from './Diet/Button';
+import { PROGRAMS } from './ProgramSelection';
 
 const ProgramList = ({ navigation, programs }) => {
   return (
@@ -19,7 +20,7 @@ const ProgramList = ({ navigation, programs }) => {
               );
             }
           })}
-          {!programs.length &&<Button title='+' onPress={() => navigation.navigate('Profile')}/>}
+          {programs.length !== PROGRAMS.length && <Button title='+' onPress={() => navigation.navigate('Selection')}/>}
         </View>
       </ScrollView>
     </View>
